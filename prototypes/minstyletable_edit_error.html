@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Unstyled Table Prototype</title>
+<link href="styles/normalize.css" rel="stylesheet" type="text/css">
+<link href="styles/minstyledtable.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="container">
+	<h1>Volunteer Hours</h1>
+	<table class="hoursgrid" summary="Parent Volunteer Hours">
+		<thead>
+			<tr>
+				<th>Student</th>
+				<th>Date</th>
+				<th>Hours</th>
+				<th>Description</th>
+				<th></th>				
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="namecolumn">
+					James Buchanan
+				</td>
+				<td class="datecolumn">
+					4/15/2017
+				</td>
+				<td class="hourscolumn">
+					2.5
+				</td>
+				<td>
+					Cleaning windows
+				</td>
+				<td class="actionscolumn">
+					<button disabled>Remove</button>
+					<button disabled>Edit</button>
+				</td>
+			</tr>
+			<tr>
+				<td class="namecolumn">
+					Johannes Kepler
+				</td>
+				<td class="datecolumn">
+					5/10/2017
+				</td>
+				<td class="hourscolumn">
+					3
+				</td>
+				<td>
+					Setting up for the festival
+				</td>
+				<td class="actionscolumn">
+					<button disabled>Remove</button>
+					<button disabled>Edit</button>
+				</td>
+			</tr>
+			<tr>
+				<td class="namecolumn">
+					<select class="input text">
+						<option value="1">James Buchanan</option>
+						<option value="2"  selected>Cornelis Tromp</option>
+						<option value="3">Johannes Kepler</option>
+					</select> 
+				</td>
+				<td class="datecolumn">
+					<input class="input date error" type="date" value="2017-15-12" />
+				</td>
+				<td class="hourscolumn">
+					<input class="input number error" type="number" value="-2" />
+				</td>
+				<td>
+					<input class="input text error" type="text" value="" />
+				</td>
+				<td class="actionscolumn">
+					<button>Cancel</button>
+					<button disabled>Save</button>
+				</td>
+			</tr>
+			<tr>
+				<td class="namecolumn">
+					Johannes Kepler
+				</td>
+				<td class="datecolumn">
+					5/28/2017
+				</td>
+				<td class="hourscolumn">
+					1
+				</td>
+				<td>
+					Demonstrating telescope
+				</td>
+				<td class="actionscolumn">
+					<button disabled>Remove</button>
+					<button disabled>Edit</button>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td class=footercolumn" colspan="5">
+					<button disabled>Add</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	</div>
+</body>
+</html>

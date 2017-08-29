@@ -1,0 +1,84 @@
+body {
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.container {
+	margin: 0 auto;
+	padding: 30px;
+}
+
+table.hoursgrid {
+	width: 100%;
+}
+
+.hoursgrid thead {	
+	background-color: #aabbfd;
+}
+
+.hoursgrid tbody tr:nth-child(even) {
+	background-color: #c8dbfb;
+}
+
+.hoursgrid tbody tr:nth-child(odd) {
+	background-color: #deeefb;
+}
+
+.hoursgrid td, .hoursgrid th {
+	padding: 5px 10px;
+	text-align: left;
+}
+
+.hoursgrid tfoot {
+	background-color: #aabbfd;
+}
+.hoursgrid tfoot td {
+	text-align: right;
+}
+
+.input {
+	width: 100%;
+}
+
+input.error  { 
+	border: 2px solid #d66 
+}
+
+.input.error:focus {
+    outline: none !important;
+    border:2px solid red;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+td.actionscolumn {
+	text-align: right;
+	width: 145px;
+}
+
+td.actionscolumn button {
+	margin: 0 1px;
+}
+
+td.namecolumn {
+	width: 200px;
+}
+
+td.hourscolumn {
+	width: 50px;
+}
+
+td.datecolumn {
+	width: 100px;
+}
+
+.footercolumn button {
+	margin: 0 1px;
+}
