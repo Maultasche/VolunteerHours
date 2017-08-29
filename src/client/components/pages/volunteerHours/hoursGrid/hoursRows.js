@@ -14,6 +14,7 @@ const HoursRows = ({hours, students, editId, onEdit, onCancelEdit, onSave, onRem
 					hoursEntry={hoursEntry} 
 					students={students} 
 					onCancelEdit={onCancelEdit}
+					onSave={onSave}
 					onDataChanged={onDataChanged}
 				/>
 			);

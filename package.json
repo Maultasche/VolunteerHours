@@ -22,9 +22,13 @@
     "write-file-webpack-plugin": "^4.1.0"
   },
   "dependencies": {
+    "css-loader": "^0.28.5",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
+    "popper.js": "^1.12.5",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-popper": "^0.7.2",
+    "style-loader": "^0.18.2"
   }
 }

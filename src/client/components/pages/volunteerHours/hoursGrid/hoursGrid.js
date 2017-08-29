@@ -8,6 +8,8 @@ import HoursRows from './hoursRows.js';
 
 import hourEntryValidator from 'logic/validators/hourEntryValidator';
 
+import DatePicker from 'components/common/react-datepicker/react-datepicker';
+
 class HoursGrid extends React.Component {
 	constructor(props) {
 		super(props);
@@ -27,7 +29,8 @@ class HoursGrid extends React.Component {
 		this.state = {
 			students: [],
 			hours: [],				
-			editId: null
+			editId: null,
+			currentDate: moment()
 		};
 		
 		//Bind the member functions
@@ -69,7 +72,7 @@ class HoursGrid extends React.Component {
 					onDataChanged={this.onHourEntryDataChanged}
 				/>
 				<GridFooter numOfColumns={this.headers.length}>
-					[Add]
+					[Add]<DatePicker selected={this.state.currentDate} onChange={date => this.setState({currentDate: date})} />
 				</GridFooter>
 			</table>
 		);

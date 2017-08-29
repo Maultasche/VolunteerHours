@@ -35,13 +35,18 @@
 					* ActionButtons (View)
 						* Button (Edit)
 						* Button (Delete)
-			* HoursInputRow		
-				* NumberInputField (Hours)
-				* SelectInputField (Student)
-				* DateInputField (Date)
-				* TextInputField (Description)
-				* ActionButtons (Edit)
-					* Button (Cancel)
-					* Button (Save)
+			* HoursInputRow	
+				* StudentEditColumn
+					* SelectInputField (Student)
+				* HoursEditColumn
+					* NumberInputField (Hours)
+				* DateEditColumn
+					* DateInputField (Date)
+				* DescriptionEditColumn
+					* TextInputField (Description)
+				* ActionButtonsEditColumn
+					* ActionButtons (Edit)
+						* Button (Cancel)
+						* Button (Save)
 		* GridFooter 
 			* Button (Add)
