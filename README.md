@@ -30,7 +30,7 @@ The following documents are where I write down things that will help me (and any
 * [Development Plan](docs/DevelopmentPlan.md) - This is the current development plan where I've written down what I want to implement in order of implementation. In other words, it's the product backlog, and it will likely change significantly as development is under way. I also intend to add these as issues in Github.
 * [Development Notes](docs/DevelopmentNotes.md) - This is where I make notes for myself (or anyone else who's interested) while I'm developing.
 * [Application Component Hierarchy](docs/AppComponentTree.md) - This the current React application component hierarchy
-
+* [Static Prototypes](docs/StaticPrototypes.md) - The collection of static prototypes I've created. I typically create an HTML/CSS static prototype and then transform that into dynamic React components.
 
 ## Building and running
 
