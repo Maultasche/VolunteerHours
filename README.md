@@ -4,11 +4,11 @@ Volunteer Hours is a web application for tracking school volunteer hours, and it
 
 The primary purpose of this web application is applying the React.js and Node.js knowledge I've been learning recently. It was not specifically requested by a school, but I'm certainly willing to polish it up for production if anyone is interested. 
 
-The current website for tracking volunteer hours is outdated and not very user-friendly. It would have been a decent website around the year 2000, but I thought that I could certainly do much better, so I chose it as the business domain for this application. 
+The current website for tracking volunteer hours is outdated and not very user-friendly. It would have been a decent website around the year 2000, but I thought that I could certainly do better. So I chose tracking volunteer hours as the business domain for this application. 
 
 I'm going to be starting off with an extremely simple page and then building the application up from there. The goal is to end up with a functional, usable application that demonstrates my web development skills and will be able to serve as a production application with a bit of polishing. 
 
-In my experience, it's best to start off with something simple and basic, and have something to show sooner, with further iterations to improve it later on. If I'm fortunate, I may get some actual feedback somewhere along the way that will help me with subsequent iterations.
+In my experience, it's best to start off with something simple and basic allowing me to show off a working product sooner. I can then improve upon it later on in further iterations, ideally with feedback that helps guide those further iterations. If I'm fortunate with this project, I may get some actual feedback somewhere along the way that will help me with subsequent iterations.
 
 ## Current Status (as of August 29th, 2017)
 
