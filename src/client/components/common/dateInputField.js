@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import DatePicker from 'components/common/react-datepicker/react-datepicker';
 import moment from 'moment';
 
-// import 'components/common/react-datepicker/react-datepicker.css';
+//TODO: Replace this with a datepicker control
 
 /**
  * @callback changeCallback
@@ -16,7 +15,7 @@ import moment from 'moment';
  *   The date can be a string, a Javascript Date, or a moment object: anything that moment.js 
  *   can parse.
  * @param (changeCallback} onChange - The function that will be called when the data is changed.
- *   The new data value will be passed in as the first parameter.
+ *   The new date value will be passed in as the first parameter.
  */
 const DateInputField = ({date, onChange}) => {
 	//If the date was not specified, set it to the current date, otherwise
@@ -28,9 +27,15 @@ const DateInputField = ({date, onChange}) => {
 		date = moment(date);
 	}
 
+	//Event handler will convert the event to a value and then call
+	//the parent handler
+	let onDateChange = event => {
+		onChange(moment(event.target.value, "l"));
+	};
+	
 	return (
 		<input className="input date" type="text" 
-			value={date.format("l")} onChange={onChange}/>
+			value={date.format("l")} onChange={onDateChange}/>
 	);
 };
 
