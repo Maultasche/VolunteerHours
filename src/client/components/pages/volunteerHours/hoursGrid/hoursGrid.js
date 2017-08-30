@@ -8,8 +8,6 @@ import HoursRows from './hoursRows.js';
 
 import hourEntryValidator from 'logic/validators/hourEntryValidator';
 
-import DatePicker from 'components/common/react-datepicker/react-datepicker';
-
 class HoursGrid extends React.Component {
 	constructor(props) {
 		super(props);
@@ -29,8 +27,7 @@ class HoursGrid extends React.Component {
 		this.state = {
 			students: [],
 			hours: [],				
-			editId: null,
-			currentDate: moment()
+			editId: null
 		};
 		
 		//Bind the member functions
@@ -38,6 +35,7 @@ class HoursGrid extends React.Component {
 		this.onCancelEdit = this.onCancelEdit.bind(this);
 		this.onSave = this.onSave.bind(this);
 		this.onRemove = this.onRemove.bind(this);
+		this.onHourEntryDataChanged = this.onHourEntryDataChanged.bind(this);
 	}
 
 	componentWillMount() {
@@ -72,7 +70,7 @@ class HoursGrid extends React.Component {
 					onDataChanged={this.onHourEntryDataChanged}
 				/>
 				<GridFooter numOfColumns={this.headers.length}>
-					[Add]<DatePicker selected={this.state.currentDate} onChange={date => this.setState({currentDate: date})} />
+					[Add]
 				</GridFooter>
 			</table>
 		);
@@ -144,13 +142,15 @@ class HoursGrid extends React.Component {
 	 */
 	onHourEntryDataChanged(recordId, updatedData) {
 		//Retrieve the hour entry from the component state
-		let hourEntry = _getHourEntryFromState(recordId);
+		let hourEntry = this._getHourEntryFromState(recordId);
 
 		//Merge the hour entry with the updated data
 		hourEntry = {...hourEntry, ...updatedData};
 		
 		//Update the hour entry in the component state
-		_updateHourEntryInState(hourEntry);
+		this._updateHourEntryInState(hourEntry);
+
+		console.log(`entry ${recordId} updated with ${JSON.stringify(updatedData)}`)
 	}
 	
 	/*Internal Functions*/

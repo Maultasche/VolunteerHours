@@ -19,15 +19,19 @@ import moment from 'moment';
  *   The new data value will be passed in as the first parameter.
  */
 const DateInputField = ({date, onChange}) => {
-	//If the date was not specified, set it to the current date
+	//If the date was not specified, set it to the current date, otherwise
+	//wrap it in a moment object
 	if(!date) {
 		date = moment();
 	}
+	else {
+		date = moment(date);
+	}
 
-		return (<div></div>);
-	// return (
-		// <DatePicker selected={date} onChange={onChange} />
-	// );
+	return (
+		<input className="input date" type="text" 
+			value={date.format("l")} onChange={onChange}/>
+	);
 };
 
 DateInputField.propTypes = {

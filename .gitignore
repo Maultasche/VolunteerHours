@@ -60,3 +60,5 @@ typings/
 # OS X hidden files
 .DS_STORE
 
+# Dist directory
+dist/
