@@ -13,12 +13,10 @@ import TextInputField from 'components/common/textInputField.js';
  * @param (changeCallback} [onChange] - The function that will be called when the
  *   description is changed. The new description will be passed as the first parameter.
  */
-const DescriptionEditColumn = ({description, onChange=()=>{}}) => {
-	let onTextChange = event => onChange(event.target.value);
-	
+const DescriptionEditColumn = ({description, onChange}) => {	
 	return (
 		<td className="descriptioncolumn">
-			<TextInputField text={description} maxLength={250} onChange={onTextChange} />
+			<TextInputField text={description} maxLength={250} onChange={onChange} />
 		</td>
 	);
 };
@@ -26,6 +24,11 @@ const DescriptionEditColumn = ({description, onChange=()=>{}}) => {
 DescriptionEditColumn.propTypes = {
 	description: PropTypes.string,
 	onChange: PropTypes.func
+};
+
+DescriptionEditColumn.defaultProps = {
+	description: "",
+	onChange: (()=>{})
 };
 
 export default DescriptionEditColumn;

@@ -5,6 +5,7 @@ import moment from 'moment';
 import DateEditColumn from './dateEditColumn.js';
 import StudentEditColumn from './studentEditColumn.js';
 import DescriptionEditColumn from './descriptionEditColumn.js';
+import HoursEditColumn from './hoursEditColumn.js';
 
 const HoursEditRow = ({hoursEntry, students, onCancelEdit=()=>{}, onSave=()=>{}, onDataChanged=()=>{}}) => {
 	//Called when the student is changed
@@ -23,10 +24,13 @@ const HoursEditRow = ({hoursEntry, students, onCancelEdit=()=>{}, onSave=()=>{},
 			{studentId: selectedStudentId, studentName: selectedStudentName});
 	};
 	
+	let onHoursChange = hours => {
+		onDataChanged(hoursEntry.id, {hours});
+	};
+
 	//Called when the date is changed
 	let onDateChange = date => {
-		onDataChanged(hoursEntry.id, 
-			{date: date.format("YYYY-MM-DD")});
+		onDataChanged(hoursEntry.id, {date});
 	};
 	
 	//Called when the description is changed
@@ -41,8 +45,14 @@ const HoursEditRow = ({hoursEntry, students, onCancelEdit=()=>{}, onSave=()=>{},
 				selectedStudentId={hoursEntry.studentId}
 				onChange={onStudentChange}
 			/>
-			<DateEditColumn date={hoursEntry.date} onChange={onDateChange} />
-			<td colSpan="1"></td>
+			<DateEditColumn 
+				date={hoursEntry.date} 
+				onChange={onDateChange} 
+			/>
+			<HoursEditColumn 
+				hours={hoursEntry.hours} 
+				onChange={onHoursChange}
+			/>
 			<DescriptionEditColumn 
 				description={hoursEntry.description} 
 				onChange={onDescriptionChange}

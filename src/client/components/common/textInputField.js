@@ -13,10 +13,12 @@ import PropTypes from 'prop-types';
  * @param (changeCallback} onChange - The function that will be called when the data is changed.
  *   The new data value will be passed in as the first parameter.
  */
-const TextInputField = ({text, maxLength, onChange}) => {	
+const TextInputField = ({text, maxLength, onChange}) => {
+	let onTextChange = event => onChange(event.target.value);
+
 	return (
 		<input className="input text" type="text" 
-			value={text} maxLength={maxLength} onChange={onChange}/>
+			value={text} maxLength={maxLength} onChange={onTextChange}/>
 	);
 };
 
