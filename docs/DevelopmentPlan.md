@@ -11,14 +11,13 @@ This is the development plan for the Volunteer Hours application. We're starting
 * Implement static prototype with a basic table in edit mode with minimal styling [Done]
 * Implement static prototype with a basic table in add mode with minimal styling [Done]
 * Implement screen containing a display-only basic table with minimal styling and hardcoded JSON data on the page [Done]
-* Modify screen with display-only table to allow edits
-* Modify screen with editable table to allow adds
+* Modify screen with display-only table to allow edits [Done]
+* Modify screen with editable table to allow adds [Done]
+* Implement client-side validation
 * Implement hours grid with generic grid component
-* Implement static prototype with flex box styling
 * Implement screen with flex box styling
 * Implement static prototype with Bootstrap
 * Implement screen with Bootstrap
-* Implement client-side validation
 * Implement tests for client-side code
 * Set up node server that serves the page 
 * Modify the node server to store JSON data in memory and return JSON from an API endpoint

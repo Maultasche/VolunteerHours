@@ -6,7 +6,7 @@ import HoursViewColumn from './hoursViewColumn.js';
 import DescriptionViewColumn from './descriptionViewColumn.js';
 import ActionsViewColumn from './actionsViewColumn.js';
 
-const HoursViewRow = ({hoursEntry, onEdit, onRemove}) => {
+const HoursViewRow = ({hoursEntry, addingRow, onEdit, onRemove}) => {
 	return (
 		<tr>
 			<StudentViewColumn studentName={hoursEntry.studentName} />
@@ -16,7 +16,8 @@ const HoursViewRow = ({hoursEntry, onEdit, onRemove}) => {
 			<ActionsViewColumn 
 				recordId={hoursEntry.id} 
 				onEdit={onEdit}
-				onRemove={onRemove} 
+				onRemove={onRemove}
+				addingRow={addingRow} 
 			/>
 		</tr>	
 	)
@@ -25,7 +26,14 @@ const HoursViewRow = ({hoursEntry, onEdit, onRemove}) => {
 HoursViewRow.PropTypes = {
 	hoursEntry: PropTypes.object.isRequired,
 	onEdit: PropTypes.func,
-	onRemove: PropTypes.func
+	onRemove: PropTypes.func,
+	addingRow: PropTypes.bool
+};
+
+HoursViewRow.PropTypes = {
+	onEdit: (()=>{}),
+	onRemove: (()=>{}),
+	addingRow: false
 };
 
 export default HoursViewRow;

@@ -11,7 +11,7 @@ const NumberField = ({number, formatOptions}) => {
 };
 
 NumberField.propTypes = {
-	number: PropTypes.number.isRequired,
+	number: PropTypes.number,
 	formatOptions: PropTypes.object
 };
 
