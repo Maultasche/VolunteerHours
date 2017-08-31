@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ActionButtons = ({buttonData}) => {
 	let actionButtons = buttonData.map((button, index) => 
-		<button key={index} onClick={button.onClick}>{button.text}</button>);
+		<button key={index} disabled={button.disabled} onClick={button.onClick}>{button.text}</button>);
 		
 	return (
 		<span>{actionButtons}</span>

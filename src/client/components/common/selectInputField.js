@@ -24,6 +24,11 @@ const SelectInputField = ({options, selectedOption, onChange=()=>{}}) => {
 	//the parent handler
 	let onTextChange = event => onChange(event.target.value);
 	
+	//If the selected option was not specified, choose the first option
+	if(selectedOption === null || selectedOption === undefined) {
+		selectedOption = options[0].value;
+	}
+
 	return (
 		<select className="input date" onChange={onTextChange} value={selectedOption}>
 			{optionElements}

@@ -2,24 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ActionButtons from 'components/common/actionButtons.js';
 
-const ActionsViewColumn = ({recordId, onEdit, onRemove}) => {
+const ActionsViewColumn = ({recordId, addingRow, onEdit, onRemove}) => {
 	let actionButtons = [
 		{ 
-			text: "Remove", 
-			onClick: () => {
-				if(onRemove) {
-					onRemove(recordId);
-				}
-				
-			}
+			text: "Remove",
+			disabled: addingRow, 
+			onClick: () => onRemove(recordId)
 		},
 		{ 
 			text: "Edit", 
-			onClick: () => {
-				if(onEdit) {
-					onEdit(recordId);
-				}
-			}
+			disabled: addingRow,
+			onClick: () => onEdit(recordId)
 		}
 	];
 	
@@ -34,6 +27,12 @@ ActionsViewColumn.propTypes = {
 	recordId: PropTypes.number.isRequired,
 	onEdit: PropTypes.func,
 	onRemove: PropTypes.func
+};
+
+ActionsViewColumn.defaultProps = {
+	onCancelEdit: (()=>{}),
+	onSave: (()=>{}),
+	addingRow: false
 };
 
 export default ActionsViewColumn;

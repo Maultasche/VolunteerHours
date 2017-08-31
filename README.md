@@ -10,13 +10,13 @@ I'm going to be starting off with an extremely simple page and then building the
 
 In my experience, it's best to start off with something simple and basic allowing me to show off a working product sooner. I can then improve upon it later on in further iterations, ideally with feedback that helps guide those further iterations. If I'm fortunate with this project, I may get some actual feedback somewhere along the way that will help me with subsequent iterations.
 
-## Current Status (as of August 29th, 2017)
+## Current Status (as of August 30th, 2017)
 
 The application is still in its early stages. I've started out with the page that allows parents to view and record their hours. The application currently has no concept of users, so there's one set of data for everyone.
 
-The [component hierarchy](docs/AppComponentTree.md) has been planned out, documented, and revised repeatedly. There's now a simple, functioning page containing a grid with some populated rows. The remove functionality works and the edit button converts a row into an edit row. The edit row, however, is not yet populated with edit controls. The add functionality has not yet been implemented.
+The [component hierarchy](docs/AppComponentTree.md) has been planned out, documented, and revised repeatedly. There's now a simple, functioning page containing a grid with some populated rows. The add, edit, and remove functionality have been implemented. Validation still needs to be implemented and there aren't yet any automated tests.
 
-The volunteer hours grid is currently an HTML table with minimal styling. Since I don't have strong artistic skills, I plan to eventually acquire a theme (probably a Bootstrap theme), customize the colors to match those of my childrens' school, and apply it to the page to make it prettier.
+The volunteer hours grid is currently an HTML table with minimal styling. Since I don't have strong artistic skills, I plan to eventually acquire a theme (probably a Bootstrap theme), customize the colors to match those of my childrens' school, and apply it to the page to make it prettier. Possibly a React bootstrap component library will prove useful.
 
 The client code has an API layer, but so far I haven't built the API. Instead, the API layer interacts with a module containing an initial set of hardcoded data. The plan is to implement an API using Node.js and express that the client code can connect to.
 

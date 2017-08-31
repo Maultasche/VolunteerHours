@@ -3,8 +3,9 @@ import moment from 'moment';
 import _ from 'lodash';
 
 import ColumnHeaders from './columnHeaders';
-import GridFooter from './gridFooter.js';
-import HoursRows from './hoursRows.js';
+import GridFooter from './gridFooter';
+import HoursRows from './hoursRows';
+import ActionButtons from 'components/common/actionButtons';
 
 import hourEntryValidator from 'logic/validators/hourEntryValidator';
 
@@ -27,10 +28,12 @@ class HoursGrid extends React.Component {
 		this.state = {
 			students: [],
 			hours: [],				
-			editId: null
+			editId: null,
+			addingRow: false
 		};
 		
 		//Bind the member functions
+		this.onAddRow = this.onAddRow.bind(this);
 		this.onEdit = this.onEdit.bind(this);
 		this.onCancelEdit = this.onCancelEdit.bind(this);
 		this.onSave = this.onSave.bind(this);
@@ -56,6 +59,13 @@ class HoursGrid extends React.Component {
 	}
 
 	render() {
+		let footerActionButtons = [
+			{ 
+				text: "Add", 
+				onClick: this.onAddRow
+			}
+		];
+
 		return (
 			<table className="hoursgrid" summary="Parent Volunteer Hours">
 				<ColumnHeaders headers={this.headers} />
@@ -63,6 +73,7 @@ class HoursGrid extends React.Component {
 					hours={this.state.hours} 
 					students={this.state.students}
 					editId={this.state.editId}
+					addingRow={this.state.addingRow}
 					onEdit={this.onEdit}
 					onCancelEdit={this.onCancelEdit}
 					onSave={this.onSave}
@@ -70,12 +81,25 @@ class HoursGrid extends React.Component {
 					onDataChanged={this.onHourEntryDataChanged}
 				/>
 				<GridFooter numOfColumns={this.headers.length}>
-					[Add]
+					<ActionButtons buttonData={footerActionButtons} />
 				</GridFooter>
 			</table>
 		);
 	}
 	
+	onAddRow() {		
+		if(this.state.editId !== null) {
+			//If we are currently editing, we have to save the current record
+			//before adding
+			this.onSave(recordId)
+				.then(() => this._addNewRow());
+		}
+		else {
+			//If we are not editing, just add the new row
+			this._addNewRow();
+		}
+	}
+
 	onEdit(recordId) {	
 		//If we are currently editing, we have to save the current record
 		if(this.state.editId !== null) {
@@ -87,16 +111,15 @@ class HoursGrid extends React.Component {
 			this.setState({ editId: recordId });
 		}
 	}
-	
+
 	onCancelEdit(recordId) {
-		//Retrieve the original values for the record and store them
-		//in the component state
-		this.volunteerApi.getHourEntry(recordId)
-			.then(result => this._updateHourEntryInState(result.data))
-			.catch(error => console.error(error));
-	
-		//Clear the edit state
-		this._clearEditState();
+		if(this.state.addingRow) {
+			this._cancelAdd();
+		}
+		else {
+			this._cancelEdit(recordId);		
+		}
+
 	}
 	
 	onRemove(recordId) {
@@ -120,16 +143,22 @@ class HoursGrid extends React.Component {
 			//Validate the record
 			if(hourEntryValidator.validate(hourEntry)) {
 				//Save the record
-				resolve(this.volunteerApi.updateHourEntry(recordId, hourEntry)
-					.then(result => this._clearEditState())
-					.catch(error => console.error(error)));					
+				let savePromise;
+
+				if(this.state.addingRow) {
+					resolve(this._addHourEntry(hourEntry)
+						.then(result => this._clearAddState()));
+				}
+				else {
+					resolve(this._updateHourEntry(recordId, hourEntry)
+						.then(result => this._clearEditState()));
+											
+				}
 			}
 			else {
 				reject(`The hour entry with an ID of ${recordId} did not pass validation`);
 			}
 		});
-		
-
 	}
 	
 	/**
@@ -149,15 +178,73 @@ class HoursGrid extends React.Component {
 		
 		//Update the hour entry in the component state
 		this._updateHourEntryInState(hourEntry);
-
-		console.log(`entry ${recordId} updated with ${JSON.stringify(updatedData)}`)
 	}
 	
 	/*Internal Functions*/
 	
+	/**
+	 * Adds a new row to the grid and puts the grid into add mode
+	 * @return {Object} A promise representing the operation
+	 */
+	_addNewRow() {
+		let hours = this.state.hours;
+	
+		return this.volunteerApi.getNewHourEntry()
+			.then(hourEntry => {
+				this.setState({
+					hours:[...this.state.hours, hourEntry],
+					addingRow: true
+				});
+			});
+	}
+
+	/**
+	 * Adds an hour entry to the data source and then updates
+	 * the added entry in the component state
+	 * @param {Object} hourEntry - The hour entry to be added
+	 * @return {Object} A promise representing the operation
+	 */
+	_addHourEntry(hourEntry) {
+		return this.volunteerApi
+			.addHourEntry(hourEntry)
+			.then(result => this._updateAddedHourEntryInState(result.data))
+			.catch(error => console.error(error));
+	}
+
+	/**
+	 * Cancels a row add
+	 */
+	_cancelAdd() {
+		//Remove the add row from the state
+		this._removeHourEntryFromState(null);
+
+		//Clear the add state
+		this._clearAddState();
+	}
+
+	/**
+	 * Cancels a row edit
+	 * @param  {number} recordId The ID of the record being edited
+	 */
+	_cancelEdit(recordId) {
+		//Retrieve the original values for the record and store them
+		//in the component state
+		this.volunteerApi.getHourEntry(recordId)
+			.then(result => this._updateHourEntryInState(result.data))
+			.catch(error => console.error(error));
+	
+		//Clear the edit state
+		this._clearEditState();	
+	}
+
+	_clearAddState() {
+		//Indicate that we are no longer adding a record
+		this.setState({addingRow: false});
+	}
+
 	_clearEditState() {
 		//Indicate that we are no longer editing a record
-		this.setState({ editId: null });
+		this.setState({editId: null});
 	}
 	
 	_getHourEntryFromState(hourEntryId) {
@@ -184,7 +271,20 @@ class HoursGrid extends React.Component {
 		this.setState({ hours })
 	}
 
-	_updateHourEntryInState(hourEntry) {
+	_updateHourEntry(hourEntryId, hourEntry) {
+		return this.volunteerApi
+			.updateHourEntry(hourEntryId, hourEntry)
+			.then(result => this._updateHourEntryInState(result.data))
+			.catch(error => console.error(error));
+	}
+
+	/**
+	 * Updates an hour entry in the component sate
+	 * @param  {Object} hourEntry - The hour entry that will replace the old entry
+	 * @param  {number} [hourEntryId] - The ID of the hour entry to be updated.
+	 *   This parameter defaults to hourEntry.id.
+	 */
+	_updateHourEntryInState(hourEntry, hourEntryId=hourEntry.id) {
 		//Get the hours array
 		let hours = this.state.hours;
 
@@ -197,6 +297,16 @@ class HoursGrid extends React.Component {
 
 		//Update the state
 		this.setState({ hours });
+	}
+
+	/**
+	 * Updates the added record in the component state (the record
+	 * with an id of null) with a new hour entry record
+	 * @param  {Object} hourEntry - The hour entry that will replace
+	 * the added record
+	 */
+	_updateAddedHourEntryInState(hourEntry) {
+		this._updateHourEntryInState(hourEntry, null);	
 	}
 
 	/*End Internal Functions*/

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import HoursEditRow from './hoursEditRow';
 import HoursViewRow from './hoursViewRow';
 
-const HoursRows = ({hours, students, editId, onEdit, onCancelEdit, onSave, onRemove, onDataChanged}) => {
+const HoursRows = ({hours, students, editId, addingRow, onEdit, onCancelEdit, onSave, onRemove, onDataChanged}) => {
 	let hourEntries = hours.map(hoursEntry => {
 		let row = null;
 		
@@ -26,6 +26,7 @@ const HoursRows = ({hours, students, editId, onEdit, onCancelEdit, onSave, onRem
 					hoursEntry={hoursEntry} 
 					onEdit={onEdit}
 					onRemove={onRemove}
+					addingRow={addingRow}
 				/>
 			);
 		}
@@ -44,6 +45,7 @@ HoursRows.propTypes = {
 	hours: PropTypes.array.isRequired,
 	students: PropTypes.array.isRequired,
 	editId: PropTypes.number,
+	addingRow: PropTypes.bool,
 	onEdit: PropTypes.func,
 	onCancelSave: PropTypes.func,
 	onSave: PropTypes.func,

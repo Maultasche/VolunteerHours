@@ -14,6 +14,9 @@ import PropTypes from 'prop-types';
  *   The new number value will be passed in as the first parameter.
  */
 const NumberInputField = ({number, onChange, onParseError}) => {
+	//Convert a null number to an empty string
+	number = (number === null ? "" : number);
+
 	let onNumberChange = event => {
 		let numberString = event.target.value;
 		let parsedNumber = Number(numberString);
@@ -38,6 +41,7 @@ NumberInputField.propTypes = {
 };
 
 NumberInputField.defaultProps = {
+	number: "",
 	onChange: (()=>{}),
 	onParseError: (()=>{})
 };

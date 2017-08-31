@@ -6,8 +6,9 @@ import DateEditColumn from './dateEditColumn.js';
 import StudentEditColumn from './studentEditColumn.js';
 import DescriptionEditColumn from './descriptionEditColumn.js';
 import HoursEditColumn from './hoursEditColumn.js';
+import ActionsEditColumn from './ActionsEditColumn.js';
 
-const HoursEditRow = ({hoursEntry, students, onCancelEdit=()=>{}, onSave=()=>{}, onDataChanged=()=>{}}) => {
+const HoursEditRow = ({hoursEntry, students, onCancelEdit, onSave, onDataChanged}) => {
 	//Called when the student is changed
 	let onStudentChange = selectedStudentId => {	
 		//Find the name that corresponds to the student id
@@ -16,9 +17,7 @@ const HoursEditRow = ({hoursEntry, students, onCancelEdit=()=>{}, onSave=()=>{},
 			.find(student => student.id == selectedStudentId)
 			
 		let selectedStudentName = selectedStudent ? selectedStudent.name : null;
-		
-		console.log(JSON.stringify({studentId: selectedStudentId, studentName: selectedStudentName}));
-		
+				
 		//Call the data changed event handler with the student ID and name
 		onDataChanged(hoursEntry.id, 
 			{studentId: selectedStudentId, studentName: selectedStudentName});
@@ -57,7 +56,11 @@ const HoursEditRow = ({hoursEntry, students, onCancelEdit=()=>{}, onSave=()=>{},
 				description={hoursEntry.description} 
 				onChange={onDescriptionChange}
 			/>
-			<td colSpan="1"></td>
+			<ActionsEditColumn
+				recordId={hoursEntry.id}
+				onCancelEdit={onCancelEdit}
+				onSave={onSave}
+			/>
 		</tr>
 	)
 };
@@ -68,6 +71,12 @@ HoursEditRow.PropTypes = {
 	onCancelEdit: PropTypes.func,
 	onSave: PropTypes.func,
 	onDataChanged: PropTypes.func
+};
+
+HoursEditRow.defaultProps = {
+	onCancelEdit: (()=>{}),
+	onSave: (()=>{}),
+	onDataChanged: (()=>{})
 };
 
 export default HoursEditRow;
