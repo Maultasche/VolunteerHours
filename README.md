@@ -20,7 +20,7 @@ The volunteer hours grid is currently an HTML table with minimal styling. Since 
 
 The client code has an API layer, but so far I haven't built the API. Instead, the API layer interacts with a module containing an initial set of hardcoded data. The plan is to implement an API using Node.js and express that the client code can connect to.
 
-See the [development plan]((docs/DevelopmentPlan.md) for a list of what I've done so far and what I intend on doing.
+See the [development plan](docs/DevelopmentPlan.md) for a list of what I've done so far and what I intend on doing.
 
 ## Development Documents
 
